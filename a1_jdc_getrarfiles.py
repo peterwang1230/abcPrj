@@ -7,8 +7,8 @@ from os.path import expanduser
 home = expanduser("~")
 
 url = 'http://data.judicial.gov.tw/'              # starting url
-targetDir = home + '/' + 'JDCYuan'
-os.makedirs(targetDir, exist_ok=True)   # store opendata rar files in ~/JDCYuan
+targetDir = home + '/' + 'JDCYuanSRC'
+os.makedirs(targetDir, exist_ok=True)   # store opendata rar files in ~/JDCYuanSRC
 
 i = 0
 

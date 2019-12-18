@@ -1,10 +1,32 @@
 # hbirPrj
 HBIR 海選計畫
 
-1. 擷取司法院判決開放資料
-司法院 open data 從 1996/01 ~ 2019/10 計285 壓縮檔 （.rar files)
-可用 a0_jdc_rarfiles.py 列出
+# List 司法院判決開放資料
+survey 判決書 open data files
+a0_jdc_rarfiles.py
 
-2. 解壓縮
-3. 建資料庫
+# 網路爬蟲下載司法院判決開放資料 
+a1_jdc_getrarfiles.py
+司法院 open data 從 1996/01 ~ 2019/10 計286 壓縮檔 （.rar files)
+
+# 解壓縮司法院判決書開放資料
+a2_jdc_unrarfiles.py 產生 .json files
+計 1491 萬餘筆，82.9 GB
+
+# Google Cloud 架設 Elastic Search and Kibana 伺服器
+ES: {'host': '35.234.21.35', 'port': 9200}
+Kibana: {'host': '35.234.21.35', 'port': 5601}
+
+# 建索引
+jdcyuan_index.json
+
+# 建刑事索引資料庫 (10 月)
+概念驗証刑事案件: 27087 案例
+index_name = 'jdcyuan_dm_201910'
+a3_jdc_es_indexing.py
+
+# 調整並建立判決書詞庫 
+user_dic 
+
+# 關鍵字擷取
 
