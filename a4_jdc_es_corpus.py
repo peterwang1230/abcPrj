@@ -9,8 +9,8 @@ from elasticsearch import Elasticsearch
 import re
 import string
 import jieba.analyse
-from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.feature_extraction.text import CountVectorizer
+# from sklearn.feature_extraction.text import TfidfTransformer
+# from sklearn.feature_extraction.text import CountVectorizer
 
 
 def clean_text_round1(text):
@@ -52,7 +52,7 @@ def create_corpus(domain, port, index_name, size):
     for hit in res['hits']['hits']:
         i = i + 1
         # print(hit["_source"]["JFULL"])
-        strJFull = hit["_source"]["JFULL"]
+        strJFull = hit["_source"]["JTITLE"] + hit["_source"]["JFULL"]
         strJFull = clean_text_round1(strJFull)
         strJFull = clean_text_round2(strJFull)
         all_docs[str(i)] = '  '.join(jieba.cut(strJFull, cut_all=False))
@@ -61,13 +61,13 @@ def create_corpus(domain, port, index_name, size):
     #     print(item)
 
     # Generate df from all_docs dict
-    df = pd.DataFrame(list(all_docs.values()), columns=['JFULL'])
+    df = pd.DataFrame(list(all_docs.values()), columns=['JTLEFULL'])
     # print(df)
     return df
 
 
 df = create_corpus(domain, port, index_name, size)
-print(df)
+# print(df)
 pickle_out = open("df_pickle", "wb")
 pickle.dump(df, pickle_out)
 pickle_out.close()

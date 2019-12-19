@@ -38,4 +38,6 @@ a5_jdc_add_corpus
 df.reset_index(inplace=True) 計數
  
 # 關鍵字擷取
+stop_words_tw.txt 調校
+a6_jdc_tfidf.py 關鍵字調校 Top 10
 
