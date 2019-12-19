@@ -9,8 +9,12 @@ from elasticsearch import Elasticsearch
 import re
 import string
 import jieba.analyse
-# from sklearn.feature_extraction.text import TfidfTransformer
-# from sklearn.feature_extraction.text import CountVectorizer
+
+domain = "35.234.21.35"
+port = 9200
+index_name = 'jdcyuan_dm_201910'
+size = 5
+jieba.load_userdict("userdict_tw.txt")
 
 
 def clean_text_round1(text):
@@ -27,10 +31,6 @@ def clean_text_round2(text):    # 英數字及中文字
     text = rule.sub('', text)
     return text
 
-domain = "35.234.21.35"
-port = 9200
-index_name = 'jdcyuan_dm_201910'
-size = 5
 
 def create_corpus(domain, port, index_name, size):
     try:
@@ -67,7 +67,8 @@ def create_corpus(domain, port, index_name, size):
 
 
 df = create_corpus(domain, port, index_name, size)
-# print(df)
+print(df)
+
 pickle_out = open("df_pickle", "wb")
 pickle.dump(df, pickle_out)
 pickle_out.close()
