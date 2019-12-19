@@ -25,7 +25,8 @@ jdcyuan_index.json
 index_name = 'jdcyuan_dm_201910'
 a3_jdc_es_indexing.py
 
-# 調整並建立判決書詞庫 
+# 調整並建立判決書詞庫
+Kibana Client 
 user_dic 
 
 # 關鍵字擷取
