@@ -25,9 +25,17 @@ jdcyuan_index.json
 index_name = 'jdcyuan_dm_201910'
 a3_jdc_es_indexing.py
 
-# 調整並建立判決書詞庫
+# 調整並建立判決書中文斷詞詞庫
 Kibana Client 
 user_dic 
 
+# 讀取 ES NoSQL DB，建立判決書語料庫 （Corpus)
+a4_jdc_es_corpus.py
+pickle out for integration.
+
+# 新增語料庫
+a5_jdc_add_corpus
+df.reset_index(inplace=True) 計數
+ 
 # 關鍵字擷取
 

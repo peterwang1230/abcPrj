@@ -22,47 +22,52 @@ def clean_text_round1(text):
     return text
 
 
-def clean_text_round2(text):
+def clean_text_round2(text):    # 英數字及中文字
     rule = re.compile(r"[^a-zA-Z0-9\u4e00-\u9fa5]")
     text = rule.sub('', text)
     return text
 
-DOMAIN = "localhost"
-ELASTIC_PORT = 9200
-# BOTTLE_PORT = 1234
+domain = "35.234.21.35"
+port = 9200
 index_name = 'jdcyuan_dm_201910'
+size = 5
 
-try:
-    # declare a client instance 'es'
-    es = Elasticsearch([{'host': '35.234.21.35', 'port': 9200}])
-    # info() method raises error if domain or conn is invalid print the result
-    # print(json.dumps(Elasticsearch.info(es), indent=4), "\n")
+def create_corpus(domain, port, index_name, size):
+    try:
+        # declare a client instance 'es'
+        es = Elasticsearch([{'host': domain, 'port': port}])
+        # info() method raises error if domain or conn is invalid print the result
+        # print(json.dumps(Elasticsearch.info(es), indent=4), "\n")
 
-except Exception as err:
-    print("Elasticsearch() ERROR:", err, "\n")
-    # client is set to none if connection is invalid
-    es = None
+    except Exception as err:
+        print("Elasticsearch() ERROR:", err, "\n")
+        # client is set to none if connection is invalid
+        es = None
 
-all_docs = {}
+    all_docs = {}
 
-res = es.search(index=index_name, body={"size": 5, "query": {"match_all": {}}})
-# print("Got %d Hits:" % res['hits']['total']['value'])
-i = 0
-for hit in res['hits']['hits']:
-    i = i + 1
-    # print(hit["_source"]["JFULL"])
-    strJFull = hit["_source"]["JFULL"]
-    strJFull = clean_text_round1(strJFull)
-    strJFull = clean_text_round2(strJFull)
-    all_docs[str(i)] = '  '.join(jieba.cut(strJFull, cut_all=False))
+    res = es.search(index=index_name, body={"size": size, "query": {"match_all": {}}})
+    # print("Got %d Hits:" % res['hits']['total']['value'])
+    i = 0
+    for hit in res['hits']['hits']:
+        i = i + 1
+        # print(hit["_source"]["JFULL"])
+        strJFull = hit["_source"]["JFULL"]
+        strJFull = clean_text_round1(strJFull)
+        strJFull = clean_text_round2(strJFull)
+        all_docs[str(i)] = '  '.join(jieba.cut(strJFull, cut_all=False))
 
-# for item in all_docs.items():
-#     print(item)
+    # for item in all_docs.items():
+    #     print(item)
 
-# Generate df from all_docs dict
-df = pd.DataFrame(list(all_docs.values()), columns=['JFULL'])
+    # Generate df from all_docs dict
+    df = pd.DataFrame(list(all_docs.values()), columns=['JFULL'])
+    # print(df)
+    return df
+
+
+df = create_corpus(domain, port, index_name, size)
 print(df)
-
 pickle_out = open("df_pickle", "wb")
 pickle.dump(df, pickle_out)
 pickle_out.close()
