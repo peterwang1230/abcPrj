@@ -41,3 +41,6 @@ df.reset_index(inplace=True) 計數
 stop_words_tw.txt 調校
 a6_jdc_tfidf.py 關鍵字調校 Top 10
 
+# 調整權重
+a7_jdc_adj_weight.py
+

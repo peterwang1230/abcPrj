@@ -6,11 +6,16 @@ import jieba.analyse
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 
-pickle_in = open("df_pickle", "rb")
+# jieba.set_dictionary("dict.txt.big")
+jieba.load_userdict("userdict_tw.txt")
+
+pickle_in = open("jfull_pickle", "rb")
 df = pickle.load(pickle_in)
+pickle_in.close()
+
 # print(df)
 
-docs = df['JTLEFULL'].tolist()
+docs = df['JFULL'].tolist()
 # print(docs)
 
 #
@@ -96,13 +101,14 @@ tf_idf_vector = tfidf_transformer.transform(cv.transform([doc]))
 # sort the tf-idf vectors by descending order of scores
 sorted_items = sort_coo(tf_idf_vector.tocoo())
 # extract only the top n; n here is 10
-keywords = extract_topn_from_vector(feature_names, sorted_items, 10)
+keywords = extract_topn_from_vector(feature_names, sorted_items, 25)
 
 # now print the results
-# print("\n=====Doc=====")
-# print(doc)
+print("\n===Keywords item===")
+print(keywords)
+# for i in keywords.items():
+#     print(i)
 
-print("\n===Keywords===")
-for k in keywords:
-    print(k, keywords[k])
+# add a dummy breakpoint for keywords print
+# print()     
 

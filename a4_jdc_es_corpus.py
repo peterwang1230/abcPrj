@@ -13,7 +13,7 @@ import jieba.analyse
 domain = "35.234.21.35"
 port = 9200
 index_name = 'jdcyuan_dm_201910'
-size = 5
+size = 200
 
 # jieba.set_dictionary("dict.txt.big")
 jieba.load_userdict("userdict_tw.txt")
@@ -34,7 +34,7 @@ def clean_text_round2(text):    # 英數字及中文字
     return text
 
 
-def create_corpus(domain, port, index_name, size):
+def create_corpus(domain, port, index_name, field, size):
     try:
         # declare a client instance 'es'
         es = Elasticsearch([{'host': domain, 'port': port}])
@@ -54,24 +54,33 @@ def create_corpus(domain, port, index_name, size):
     for hit in res['hits']['hits']:
         i = i + 1
         # print(hit["_source"]["JFULL"])
-        strJFull = hit["_source"]["JTITLE"] + hit["_source"]["JFULL"]
-        strJFull = clean_text_round1(strJFull)
-        strJFull = clean_text_round2(strJFull)
-        all_docs[str(i)] = '  '.join(jieba.cut(strJFull, cut_all=False))
+        # strJFull = hit["_source"]["JTITLE"] + hit["_source"]["JFULL"]
+        strField = hit["_source"][field]
+        strField = clean_text_round1(strField)
+        strField = clean_text_round2(strField)
+        all_docs[str(i)] = '  '.join(jieba.cut(strField, cut_all=False))
 
     # for item in all_docs.items():
     #     print(item)
 
     # Generate df from all_docs dict
-    df = pd.DataFrame(list(all_docs.values()), columns=['JTLEFULL'])
+    df = pd.DataFrame(list(all_docs.values()), columns=[field])
     # print(df)
     return df
 
 
-df = create_corpus(domain, port, index_name, size)
-print(df)
+df_jfull = create_corpus(domain, port, index_name, "JFULL", size)
+# print(df_jfull)
 
-pickle_out = open("df_pickle", "wb")
-pickle.dump(df, pickle_out)
+df_jtitle = create_corpus(domain, port, index_name, "JTITLE", size)
+for i in df_jtitle['JTITLE']:
+    print(i)
+
+pickle_out = open("jfull_pickle", "wb")
+pickle.dump(df_jfull, pickle_out)
+pickle_out.close()
+
+pickle_out = open("jtitle_pickle", "wb")
+pickle.dump(df_jtitle, pickle_out)
 pickle_out.close()
 
