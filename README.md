@@ -14,8 +14,8 @@ a2_jdc_unrarfiles.py 產生 .json files
 計 1491 萬餘筆，82.9 GB
 
 # Google Cloud 架設 Elastic Search and Kibana 伺服器
-ES: {'host': '35.234.21.35', 'port': 9200}
-Kibana: {'host': '35.234.21.35', 'port': 5601}
+ES: http://35.234.21.35:9200/
+Kibana： http://35.234.21.35:5601/app/kibana
 
 # 建索引
 jdcyuan_index.json
