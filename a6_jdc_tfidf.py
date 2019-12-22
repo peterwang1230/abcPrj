@@ -1,6 +1,8 @@
 import pandas as pd
 import pickle
 import a4_jdc_es_corpus as escps
+import re
+import string
 import jieba.analyse
 
 from sklearn.feature_extraction.text import TfidfTransformer
@@ -101,7 +103,7 @@ tf_idf_vector = tfidf_transformer.transform(cv.transform([doc]))
 # sort the tf-idf vectors by descending order of scores
 sorted_items = sort_coo(tf_idf_vector.tocoo())
 # extract only the top n; n here is 10
-keywords = extract_topn_from_vector(feature_names, sorted_items, 25)
+keywords = extract_topn_from_vector(feature_names, sorted_items, 100)
 
 # now print the results
 print("\n===Keywords item===")

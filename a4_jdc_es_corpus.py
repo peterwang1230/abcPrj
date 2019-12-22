@@ -13,7 +13,7 @@ import jieba.analyse
 domain = "35.234.21.35"
 port = 9200
 index_name = 'jdcyuan_dm_201910'
-size = 200
+size = 1000
 
 # jieba.set_dictionary("dict.txt.big")
 jieba.load_userdict("userdict_tw.txt")
@@ -68,19 +68,20 @@ def create_corpus(domain, port, index_name, field, size):
     # print(df)
     return df
 
+def pickle_jfull_and_jtitle():
+    df_jfull = create_corpus(domain, port, index_name, "JFULL", size)
+    # print(df_jfull)
 
-df_jfull = create_corpus(domain, port, index_name, "JFULL", size)
-# print(df_jfull)
+    df_jtitle = create_corpus(domain, port, index_name, "JTITLE", size)
+    print(df_jtitle)
 
-df_jtitle = create_corpus(domain, port, index_name, "JTITLE", size)
-for i in df_jtitle['JTITLE']:
-    print(i)
+    pickle_out = open("jfull_pickle", "wb")
+    pickle.dump(df_jfull, pickle_out)
+    pickle_out.close()
 
-pickle_out = open("jfull_pickle", "wb")
-pickle.dump(df_jfull, pickle_out)
-pickle_out.close()
+    pickle_out = open("jtitle_pickle", "wb")
+    pickle.dump(df_jtitle, pickle_out)
+    pickle_out.close()
 
-pickle_out = open("jtitle_pickle", "wb")
-pickle.dump(df_jtitle, pickle_out)
-pickle_out.close()
-
+if __name__ == "__main__":
+    pickle_jfull_and_jtitle()   # The main function goes here.
