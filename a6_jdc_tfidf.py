@@ -1,6 +1,7 @@
 import pandas as pd
 import pickle
 import a4_jdc_es_corpus as escps
+from a7_jdc_adj_weight import adj_weight
 import re
 import string
 import jieba.analyse
@@ -108,9 +109,9 @@ keywords = extract_topn_from_vector(feature_names, sorted_items, 100)
 # now print the results
 print("\n===Keywords item===")
 print(keywords)
-# for i in keywords.items():
-#     print(i)
 
-# add a dummy breakpoint for keywords print
-# print()     
+print("\n++++++++++++++加權後+++++++")
+adj_weight(keywords)
+y = {k: v for k, v in sorted(keywords.items(), key=lambda item: item[1], reverse=True)}
+print(y)
 
