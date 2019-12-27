@@ -13,7 +13,7 @@ import jieba.analyse
 domain = "35.234.21.35"
 port = 9200
 index_name = 'jdcyuan_dm_201910'
-size = 1000
+size = 10
 
 # jieba.set_dictionary("dict.txt.big")
 jieba.load_userdict("userdict_tw.txt")
