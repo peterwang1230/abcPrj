@@ -12,7 +12,7 @@ kwsFile = open('jfull.txt', 'w', encoding="utf-8")
 i = 0
 for doc in docs:
     i = i + 1
-    if i > 5:
+    if i > 10:
         break
     kwsFile.write(doc)
     kwsFile.write('\n')
