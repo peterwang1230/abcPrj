@@ -50,28 +50,3 @@ print(dictionary.token2id)
 corpus = [dictionary.doc2bow(text) for text in texts]
 corpora.MmCorpus.serialize('dict_out.mm', corpus) # store to disk, for later use
 print(corpus)
-
-
-# # Build LDA model
-# lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-#                                            id2word=id2word,
-#                                            num_topics=3, 
-#                                            random_state=100,
-#                                            update_every=1,
-#                                            chunksize=100,
-#                                            passes=10,
-#                                            alpha='auto',
-#                                            per_word_topics=True)
-
-# # lda_model = gensim.models.ldamodel.LdaModel(corpus, id2word=id2word, num_topics=10)
-# pprint(lda_model.print_topics())
-
-# # Plotting tools
-# import pyLDAvis
-# import pyLDAvis.gensim  # don't skip this
-# import matplotlib.pyplot as plt
-# # Visualize the topics
-# # pyLDAvis.enable_notebook()
-# vis = pyLDAvis.gensim.prepare(lda_model, corpus, id2word)
-
-# 土# vis
