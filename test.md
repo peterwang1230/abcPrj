@@ -44,3 +44,14 @@ a6_jdc_tfidf.py 關鍵字調校 Top 10
 # 調整權重
 a7_jdc_adj_weight.py
 
+# Topical Modeling Case study
+b0_topical.py
+
+# Create JTITLE 語料庫 for Topical Modeling
+b1_jtitle_corpus.py
+
+# Create JFULL 語料庫 for Topical Modeling
+b1_jfull_corpus.py  
+
+# JTITLE Topical Modeling 測試
+b3_jtitle_topical.py
