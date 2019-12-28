@@ -1,4 +1,11 @@
+# Gensim
+import gensim
+import gensim.corpora as corpora
+from gensim.utils import simple_preprocess
+from gensim.models import CoherenceModel
 from gensim import corpora, models, similarities
+from pprint import pprint
+
 documents = ["Human machine interface for lab abc computer applications",
               "A survey of user opinion of computer system response time",
               "The EPS user interface management system",
@@ -35,3 +42,17 @@ corpus = [dictionary.doc2bow(text) for text in texts]
 corpora.MmCorpus.serialize('dict_out.mm', corpus) # store to disk, for later use
 print(corpus)
 
+# Build LDA model
+lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                           id2word=dictionary,
+                                           num_topics=20, 
+                                           random_state=100,
+                                           update_every=1,
+                                           chunksize=100,
+                                           passes=10,
+                                           alpha='auto',
+                                           per_word_topics=True)
+
+# Print the Keyword in the 10 topics
+pprint(lda_model.print_topics())
+doc_lda = lda_model[corpus]
