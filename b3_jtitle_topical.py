@@ -65,13 +65,3 @@ lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
 
 # lda_model = gensim.models.ldamodel.LdaModel(corpus, id2word=id2word, num_topics=10)
 pprint(lda_model.print_topics())
-
-# # Plotting tools
-# import pyLDAvis
-# import pyLDAvis.gensim  # don't skip this
-# import matplotlib.pyplot as plt
-# # Visualize the topics
-# # pyLDAvis.enable_notebook()
-# vis = pyLDAvis.gensim.prepare(lda_model, corpus, id2word)
-
-# 土# vis
