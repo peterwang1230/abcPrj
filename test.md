@@ -45,6 +45,7 @@ a6_jdc_tfidf.py 關鍵字調校 Top 10
 a7_jdc_adj_weight.py
 
 # Topical Modeling Case study
+Topic Modeling with Gensim (Python)
 b0_topical.py
 
 # Create JTITLE 主題模型語料庫
