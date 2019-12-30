@@ -55,3 +55,6 @@ b1_jfull_corpus.py
 
 # JTITLE 主題模型測試
 b3_jtitle_topical.py
+
+# JFULL 主題模型測試
+b4_jfull_topical.py

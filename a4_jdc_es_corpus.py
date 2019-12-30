@@ -47,8 +47,8 @@ def create_corpus(domain, port, index_name, field, size):
         es = None
 
     all_docs = {}
-
-    res = es.search(index=index_name, body={"size": size, "query": {"match_all": {}}})
+    query_str = {"JFULL": "竊盜"} # json object
+    res = es.search(index=index_name, body={"size": size, "query": {"match_all": query_str}})
     # print("Got %d Hits:" % res['hits']['total']['value'])
     i = 0
     for hit in res['hits']['hits']:
