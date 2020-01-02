@@ -1,7 +1,9 @@
+from elasticsearch import Elasticsearch
 import pandas as pd
 import pickle
 import a4_jdc_es_corpus as escps
 from a7_jdc_adj_weight import adj_weight
+from a8_jdc_add_query import make_query, get_query
 import re
 import string
 import jieba.analyse
@@ -115,3 +117,19 @@ adj_weight(keywords)
 y = {k: v for k, v in sorted(keywords.items(), key=lambda item: item[1], reverse=True)}
 print(y)
 
+print("\n++++++++++++++Top 5+++++++")
+top5 = dict(list(y.items())[0: 5]) 
+print(top5)
+
+# make query and get result
+domain = "35.234.21.35"
+port = 9200
+index_name = 'jdcyuan_dm_201910'
+field = "JFULL"
+size = 0
+es = Elasticsearch([{'host': domain, 'port': port}])
+qry_str = make_query(top5)
+print(qry_str)
+res = get_query(es, index_name, field, size, qry_str)
+
+print(res)

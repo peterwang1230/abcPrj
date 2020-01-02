@@ -44,6 +44,9 @@ a6_jdc_tfidf.py 關鍵字調校 Top 10
 # 調整權重
 a7_jdc_adj_weight.py
 
+# Make Query Get result
+a8_jdc_add_query.py
+
 # Topical Modeling Case study
 Topic Modeling with Gensim (Python)
 b0_topical.py
