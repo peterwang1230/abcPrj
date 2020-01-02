@@ -7,7 +7,6 @@ def make_query(keywords):
     return qry_str
 
 def get_query(es, index_name, field, size, qry_str):
-
     res = es.search(index=index_name, body={
         "size": size, 
         "query": {
@@ -17,10 +16,8 @@ def get_query(es, index_name, field, size, qry_str):
                 }
             }
         }
-    })
-   
+    })   
     return res
-
 
 if __name__ == "__main__":
     # make query and get result

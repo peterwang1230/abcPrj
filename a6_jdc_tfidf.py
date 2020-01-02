@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 import a4_jdc_es_corpus as escps
 from a7_jdc_adj_weight import adj_weight
-from a8_jdc_add_query import make_query, get_query
+from a8_jdc_get_query import make_query, get_query
 import re
 import string
 import jieba.analyse
