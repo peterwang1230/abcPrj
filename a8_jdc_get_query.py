@@ -15,6 +15,13 @@ def get_query(es, index_name, field, size, qry_str):
                     "query": qry_str
                 }
             }
+        },
+        "highlight" : {
+            "pre_tags" : ["<em class=\"c_color\">"],
+            "post_tags" : ["</em>"],
+            "fields" : {
+                field : {}
+            }
         }
     })   
     return res
@@ -34,7 +41,7 @@ if __name__ == "__main__":
     port = 9200
     index_name = 'jdcyuan_dm_201910'
     field = "JFULL"
-    size = 0
+    size = 5
     es = Elasticsearch([{'host': domain, 'port': port}])
     qry_str = make_query(keywords)
     res = get_query(es, index_name, field, size, qry_str)
